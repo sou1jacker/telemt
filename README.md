@@ -57,6 +57,14 @@ Generate 16 bytes/32 characters HEX with OpenSSL or another way:
 ```bash
 openssl rand -hex 16
 ```
+OR
+```bash
+xxd -l 16 -p /dev/urandom
+```
+OR
+```bash
+python3 -c 'import os; print(os.urandom(16).hex())'
+```
 
 **1. Place your config to /etc/telemt.toml**
 

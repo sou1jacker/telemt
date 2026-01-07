@@ -33,23 +33,20 @@
 - Extensive logging via `trace` and `debug` with `RUST_LOG` method
 
 ## Quick Start Guide
-
-### Build
+**This software is designed for Debian-based OS: in addition to Debian, these are Ubuntu, Mint, Kali, MX and many other Linux**
+1. Download release
 ```bash
-# Cloning repo
-git clone https://github.com/telemt/telemt 
-# Changing Directory to telemt
-cd telemt
-# Starting Release Build
-cargo build --release
-# Move to /bin
-mv ./target/release/telemt /bin
-# Make executable
-chmod +x /bin/telemt
-# Lets go!
-telemt config.toml
+wget https://github.com/telemt/telemt/releases/latest/download/telemt
 ```
-
+2. Move to Bin Folder
+```bash
+mv telemt /bin
+```
+4. Make Executable
+```bash
+chmod +x /bin/telemt
+```
+5. Go to [How to use?](#how-to-use) section for for further steps
 ## How to use?
 ### Telemt via Systemd
 **0. Check port and generate secrets**
@@ -115,7 +112,7 @@ then Ctrl+X -> Y -> Enter to save
 ### Minimal Configuration for First Start
 ```toml
 port = 443                              # Listening port
-show_links = ["tele", "hello"]
+show_links = ["tele", "hello"]          # Specify users, for whom will be displayed the links
 
 [users]
 tele = "00000000000000000000000000000000" # Replace the secret with one generated before
@@ -190,6 +187,23 @@ enabled = true
   - in China behind the Great Firewall
   - in Russia on mobile networks, less in wired networks
   - in Iran during "activity"
+
+
+## Build
+```bash
+# Cloning repo
+git clone https://github.com/telemt/telemt 
+# Changing Directory to telemt
+cd telemt
+# Starting Release Build
+cargo build --release
+# Move to /bin
+mv ./target/release/telemt /bin
+# Make executable
+chmod +x /bin/telemt
+# Lets go!
+telemt config.toml
+```
 
 ## Why Rust?
 - Long-running reliability and idempotent behavior

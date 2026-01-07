@@ -140,8 +140,15 @@ client_keepalive = 600                  # Seconds
 client_ack_timeout = 300                # Seconds
 ```
 ### Advanced
+#### Listeners and Announce IPs
+To specify listening address and/or address in links, add to the end of config.toml:
+```toml
+[[listeners]]
+ip = "0.0.0.0"          # 0.0.0.0 = all IPs; your IP = specific listening
+announce_ip = "1.2.3.4" # IP in links
+```
 #### Upstream Manager
-To specify upstream, add config.toml to the end:
+To specify upstream, add to the end of config.toml:
 ##### Bind on IP
 ```toml
 [[upstreams]]
@@ -164,7 +171,7 @@ enabled = true
 ```toml
 [[upstreams]]
 type = "socks5"            # Specify SOCKS4 or SOCKS5
-address = "1.2.3.4:1234" # SOCKS-server Address
+address = "1.2.3.4:1234"   # SOCKS-server Address
 username = "user"          # Username for Auth on SOCKS-server
 password = "pass"          # Password for Auth on SOCKS-server
 weight = 1                 # Set Weight for Scenarios

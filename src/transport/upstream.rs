@@ -6,7 +6,7 @@ use std::time::Duration;
 use tokio::net::TcpStream;
 use tokio::sync::RwLock;
 use rand::Rng;
-use tracing::{debug, warn, error};
+use tracing::{debug, warn, error, info};
 
 use crate::config::{UpstreamConfig, UpstreamType};
 use crate::error::{Result, ProxyError};
@@ -149,6 +149,8 @@ impl UpstreamManager {
                 Ok(stream)
             },
             UpstreamType::Socks4 { address, interface, user_id } => {
+                info!("Connecting to target {} via SOCKS4 proxy {}", target, address);
+                
                 let proxy_addr: SocketAddr = address.parse()
                     .map_err(|_| ProxyError::Config("Invalid SOCKS4 address".to_string()))?;
                     
@@ -178,6 +180,8 @@ impl UpstreamManager {
                 Ok(stream)
             },
             UpstreamType::Socks5 { address, interface, username, password } => {
+                info!("Connecting to target {} via SOCKS5 proxy {}", target, address);
+                
                 let proxy_addr: SocketAddr = address.parse()
                     .map_err(|_| ProxyError::Config("Invalid SOCKS5 address".to_string()))?;
                     

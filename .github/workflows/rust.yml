@@ -10,8 +10,8 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build-and-test:
-    name: Build & Test
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:

@@ -24,11 +24,6 @@ use crate::proxy::handshake::{HandshakeSuccess, handle_mtproto_handshake, handle
 use crate::proxy::masking::handle_bad_client;
 use crate::proxy::middle_relay::handle_via_middle_proxy;
 
-/// Handle a client connection from any stream type (TCP, Unix socket)
-///
-/// This is the generic entry point for client handling. Unlike `ClientHandler::new().run()`,
-/// it skips TCP-specific socket configuration (TCP_NODELAY, keepalive, TCP_USER_TIMEOUT)
-/// which is appropriate for non-TCP streams like Unix sockets.
 pub async fn handle_client_stream<S>(
     mut stream: S,
     peer: SocketAddr,
@@ -166,6 +161,7 @@ where
         }
     }
 }
+
 
 pub struct ClientHandler;
 
@@ -418,9 +414,9 @@ impl RunningClientHandler {
 
     /// Main dispatch after successful handshake.
     /// Two modes:
-    ///   - Direct: TCP relay to TG DC (existing behavior)
+    ///   - Direct: TCP relay to TG DC (existing behavior)  
     ///   - Middle Proxy: RPC multiplex through ME pool (new — supports CDN DCs)
-    pub(crate) async fn handle_authenticated_static<R, W>(
+    async fn handle_authenticated_static<R, W>(
         client_reader: CryptoReader<R>,
         client_writer: CryptoWriter<W>,
         success: HandshakeSuccess,
